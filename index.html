@@ -7,6 +7,7 @@
     <title>Centro Médico Ñuñoa</title>
 </head>
 <script>
+    
 document.write('<p>Estadisticas centro medico ñuñoa</p>');
 
 var radiologia = [
@@ -49,32 +50,88 @@ traumatologia.push(
 )
 
 
-//Agregar código para el desafio 2 aquí
-//Eliminamos el primer elemento del arreglo y el ultimo respectivamente
+//Agregar código para el desafio 2 aquí  (Eliminamos el primer elemento del arreglo y el ultimo respectivamente)
 radiologia.shift()
 radiologia.pop()
 
 
 
-//Codigo desafio numero 3
-console.log(dental.join("-"))
+//Agregar código para el desafio 3 aquí
+
+const consultaDental = dental.map(function(x){
+    let fullDental = [x.hora, x.especialista, x.paciente, x.rut, x.prevision].join(" - ");
+    fullDental += "<br><br>"
+    return fullDental;
+});
+
+document.write(`<p>${consultaDental.join(" ")}</p>`)
 
 
 
 
+//Agregar código para el desafio 4 aquí
+
+
+const atendidosRadiologia = radiologia.map(function(x){
+    let fullRadiologia = [ x.paciente];
+    fullRadiologia = `<p>${fullRadiologia}</p>`
+    return fullRadiologia;
+});
+
+
+const atendidosTraumatologia = traumatologia.map(function(x){
+    let fullTraumatologia = [ x.paciente];
+    fullTraumatologia = `<p>${fullTraumatologia}</p>`
+    return fullTraumatologia;
+});
+
+
+const atendidosConsultaDental = dental.map(function(x){
+    let fullDental = [ x.paciente];
+    fullDental = `<p>${fullDental}</p>`
+    return fullDental;
+});
 
 
 
-document.write(`<p>Cantidad de atenciones para Radiología: ${radiologia.length}</p>`);
-document.write(`<p>Cantidad de atenciones para Traumatología: ${traumatologia.length}</p>`);
-document.write(`<p>Cantidad de atenciones para Dental: ${dental.length}</p>`);
+
+document.write(`
+<h2>Total de pacientes atendidos excepto eliminados:</h2>
+<p>${atendidosRadiologia.join(" ")}</p>
+<p>${atendidosConsultaDental.join(" ")}</p>
+<p>${atendidosTraumatologia.join(" ")}</p>
 
 
-document.write(`<p>Primera atencion: ${radiologia[0].paciente} - ${radiologia[0].prevision} | Última atención: ${radiologia[radiologia.length -1].paciente} - ${radiologia[radiologia.length -1].prevision}.</p>`);
-document.write(`<p>Primera atencion: ${traumatologia[0].paciente} - ${traumatologia[0].prevision} | Última atención: ${traumatologia[traumatologia.length -1].paciente} - ${traumatologia[traumatologia.length -1].prevision}.</p>`);
-document.write(`<p>Primera atencion: ${dental[0].paciente} - ${dental[0].prevision} | Última atención: ${dental[dental.length -1].paciente} - ${dental[dental.length -1].prevision}.</p>`);
+`)
+
+//Agregar código para el desafio 5 aquí (Filtrado de isapre en dental)
+
+var isapreDental = dental.filter(function(x){
+return x.prevision == 'ISAPRE'
+console.log(isapreDental)
+});
+document.write(`<br><h3>Pacientes dentales pertenecientes a  Isapre: </h3>` )
+for (i=0; i<isapreDental.length; i++) {
+    document.write(`
+        
+        <p>${isapreDental[i].paciente}<p>`
+        )
+}
 
 
+//Agregar código para el desafio 5 aquí (Filtrado de prevision FONASA en Traumatologia)
+
+var fonasaTraumatologia = traumatologia.filter(function(x){
+return x.prevision == 'ISAPRE'
+console.log(fonasaTraumatologia)
+});
+document.write(`<br><h3>Pacientes Traumatologia pertenecientes a FONASA (excepto eliminados que no se atendieron): </h3>` )
+for (i=0; i<fonasaTraumatologia.length; i++) {
+    document.write(`
+        
+        <p>${fonasaTraumatologia[i].paciente}<p>`
+        )
+}
 
 
 
